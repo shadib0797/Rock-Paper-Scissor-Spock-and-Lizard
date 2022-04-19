@@ -1,0 +1,609 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+}
+
+body {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    background-image: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+    color: white;
+    padding: max(3rem, 6vh) 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16vh;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    padding: 1rem 1.5rem 1rem 2rem;
+    border: 3px solid hsl(217, 16%, 45%);
+    border-radius: 15px;
+    position: relative;
+}
+
+.logo {
+    cursor: pointer;
+}
+
+.score-board {
+    background-color: white;
+    width: 150px;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.score-board .text {
+    color: hsl(229, 64%, 46%);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.score-board .score {
+    color: hsl(229, 25%, 31%);
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.indicator {
+    position: absolute;
+    top: -22px;
+    left: 80px;
+}
+
+.indicator .text {
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.indicator img {
+    width: 10%;
+    transform: rotate(150deg);
+    position: relative;
+    right: -70px;
+    top: 10px;
+}
+
+.game {
+    width: max-content;
+}
+
+.initial-state {
+    position: relative;
+    animation: resultAnimation 0.8s ease-in-out forwards;
+}
+
+.game-hand {
+    background-color: white;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 0.3s ease-in-out;
+}
+
+.three-way .game-hand:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.game-hand>img {
+    width: 45%;
+}
+
+.five-way .game-hand {
+    transform: scale(0.8);
+}
+
+.five-way .game-hand:hover {
+    cursor: pointer;
+    transform: scale(0.85);
+}
+
+.paper {
+    border: 25px solid hsl(230, 89%, 62%);
+    box-shadow: inset 0px 10px 0px rgb(187 191 216 / 50%), 0px 10px 0px #2945c2;
+}
+
+.initial-state.three-way .paper {
+    left: -90px;
+    top: -90px;
+}
+
+.initial-state.five-way .paper {
+    left: 230px;
+    top: 0px;
+}
+
+.rock {
+    border: 25px solid hsl(349, 71%, 52%);
+    box-shadow: inset 0px 10px 0px rgb(187 191 216 / 50%), 0px 10px 0px #9c1631;
+}
+
+.initial-state.three-way .rock {
+    bottom: -75px;
+    left: 55px;
+}
+
+.initial-state.five-way .rock {
+    bottom: -80px;
+    left: 180px;
+}
+
+.scissors {
+    border: 25px solid hsl(39, 89%, 49%);
+    box-shadow: inset 0px 10px 0px rgb(187 191 216 / 50%), 0px 10px 0px #c66d19;
+}
+
+.initial-state.three-way .scissors {
+    right: -90px;
+    top: -90px;
+}
+
+.initial-state.five-way .scissors {
+    right: 60px;
+    top: -120px;
+}
+
+.lizard {
+    border: 25px solid hsl(261, 73%, 60%);
+    box-shadow: inset 0px 10px 0px rgb(187 191 216 / 50%), 0px 10px 0px #6038ab;
+}
+
+.initial-state.five-way .lizard {
+    bottom: -80px;
+    left: -40px;
+}
+
+.spock {
+    border: 25px solid hsl(189, 59%, 53%);
+    box-shadow: inset 0px 10px 0px rgb(187 191 216 / 50%), 0px 10px 0px #2a8daa;
+}
+
+.initial-state.five-way .spock {
+    right: 230px;
+    top: 0px;
+}
+
+.win{
+    box-shadow: 0px 0px 0px 90px rgb(255 255 255 / 3%), 
+    0px 0px 0px 150px rgb(255 255 255 / 3%), 
+    0px 0px 0px 220px rgb(255 255 255 / 3%);
+}
+
+.rules {
+    position: absolute;
+    bottom: 2.2rem;
+    right: 2.2rem;
+    border: 2px solid #fff;
+    color: inherit;
+    outline: none;
+    font: 600 0.9rem 'Barlow Semi Condensed', sans-serif;
+    background-color: transparent;
+    letter-spacing: 2px;
+    padding: 0.8rem 1rem;
+    width: 130px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.rules:hover {
+    background-color: #fff;
+    color: hsl(229, 25%, 31%)
+}
+
+.hide {
+    display: none !important;
+}
+
+
+.middle-state {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    /* gap: 4rem; */
+}
+
+.middle-state .text {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    width: max-content;
+    margin: auto;
+}
+
+.user-picked-hand,
+.house-picked-hand {
+    width: 200px;
+    height: 200px;
+    background-color: hsl(237deg 49% 15% / 75%);
+    border-radius: 50%;
+    margin: 5rem auto 0;
+    position: relative;
+}
+
+.result {
+    transform: scale(0);
+}
+
+.result>.text {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 5rem;
+}
+
+.result>button {
+    width: 100%;
+    text-transform: uppercase;
+    font: 600 0.9rem 'Barlow Semi Condensed', sans-serif;
+    letter-spacing: 3px;
+    color: #fff;
+    background-color: rgb(220, 46, 78);
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.result>button:hover {
+    color: #dc2e4e;
+    background-color: #fff;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: modalAnimation 0.3s ease-in-out forwards;
+    top: 0;
+}
+
+@keyframes modalAnimation {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.modal-box {
+    background-color: #fff;
+    display: -ms-grid;
+    display: grid;
+    gap: 2rem;
+    width: max-content;
+    grid-template-areas:
+        "text img"
+        "rules rules";
+    padding: 2.5rem;
+    border-radius: 10px;
+    width: 450px;
+}
+
+.modal-box>.text {
+    grid-area: text;
+    color: hsl(229, 25%, 31%);
+    font-size: 2rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.modal-box>.icon-close {
+    grid-area: img;
+    justify-self: end;
+    align-self: center;
+    cursor: pointer;
+}
+
+.modal-box>.img-rules,
+.modal-box>.img-rules-bonus {
+    grid-area: rules;
+    justify-self: center;
+}
+
+.user-hand-animation {
+    animation: userAnimation .6s ease-out forwards;
+}
+
+@keyframes userAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.35);
+    }
+}
+
+.house-hand-animation {
+    animation: houseAnimation .6s ease-out forwards;
+}
+
+@keyframes houseAnimation {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1.35);
+    }
+}
+
+.animate {
+    animation: animateMiddleState 1s ease-in-out 0.75s forwards;
+}
+
+
+@keyframes animateMiddleState {
+    0% {
+        width: 50%;
+    }
+
+    100% {
+        width: 60%;
+    }
+}
+
+.animate .middle-state .result {
+    animation: resultAnimation 1s ease-in-out 0.75s forwards;
+}
+
+@keyframes resultAnimation {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+@media screen and (max-width: 1280px) {
+    .header {
+        width: 55%;
+    }
+
+    .game-hand,
+    .user-picked-hand,
+    .house-picked-hand {
+        width: 180px;
+        height: 180px;
+    }
+
+    @keyframes animateMiddleState {
+        0% {
+            width: 55%;
+        }
+
+        100% {
+            width: 65%;
+        }
+    }
+
+}
+
+@media screen and (max-width: 1200px) {
+
+    .result>.text {
+        font-size: 3rem;
+    }
+
+    @keyframes animateMiddleState {
+        0% {
+            width: 60%;
+        }
+
+        100% {
+            width: 70%;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    .header {
+        width: max(500px, 60%);
+    }
+
+    .middle-state .game-hand,
+    .user-picked-hand,
+    .house-picked-hand {
+        transform: scale(0.8);
+    }
+
+    .middle-state .text {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    }
+
+    .result>.text {
+        font-size: clamp(2rem, 4.5vw, 3.5rem);
+    }
+
+    @keyframes resultAnimation {
+        0% {
+            transform: scale(0);
+        }
+
+        100% {
+            transform: scale(0.8);
+        }
+    }
+
+    @keyframes animateMiddleState {
+        0% {
+            width: 65%;
+        }
+
+        100% {
+            width: 75%;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    body {
+        padding: 2rem 1rem;
+        gap: max(2rem, 8vh);
+    }
+
+    .header {
+        width: min(100% - 2rem, 500px);
+        padding: 0.5rem 0.75rem 0.5rem 1rem;
+        border-radius: 8px;
+    }
+
+    .logo img {
+        width: clamp(100px, 25vw, 120px);
+    }
+
+    .score-board {
+        width: clamp(90px, 25vw, 110px);
+        padding: 0.5rem;
+        border-radius: 6px;
+    }
+
+    .score-board .text {
+        font-size: clamp(0.8rem, 10vw, 1rem);
+    }
+
+    .score-board .score {
+        font-size: clamp(3rem, 12vw, 4rem);
+    }
+
+    .indicator {
+        top: -18px;
+        left: 18px;
+    }
+
+    .indicator .text,
+    .middle-state .text {
+        font-size: clamp(0.75rem, 3vw, 0.9rem);
+    }
+
+    .indicator img {
+        width: 8%;
+        right: -100px;
+    }
+
+    .rules {
+        position: relative;
+        bottom: 0;
+        right: 0;
+    }
+
+    @keyframes resultAnimation {
+        0% {
+            transform: scale(0);
+        }
+
+        100% {
+            transform: scale(0.7);
+        }
+    }
+
+    .middle-state {
+        display: -ms-grid;
+        display: grid;
+        grid-template-areas:
+            "user house"
+            "result result";
+        gap: 1.5rem max(1rem, 7vw);
+    }
+
+    .middle-state .game-hand,
+    .user-picked-hand,
+    .house-picked-hand {
+        transform: scale(0.6);
+        margin: 0;
+    }
+
+    .user-pick {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 1rem;
+        grid-area: user;
+    }
+
+    .house-pick {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 1rem;
+        grid-area: house;
+    }
+
+    .animate {
+        animation: none;
+    }
+
+    .result {
+        grid-area: result;
+        width: max-content;
+        justify-self: center;
+    }
+
+    .result>.text {
+        font-size: 3.5rem;
+        margin-top: 0;
+    }
+
+    .result>button {
+        font-size: 1rem;
+    }
+
+    .modal-box {
+        grid-template-areas:
+            "text"
+            "rules"
+            "img";
+        align-content: space-between;
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal-box>.icon-close, .modal-box>.text {
+        justify-self: center;
+    }
+    .modal-box>.img-rules,
+.modal-box>.img-rules-bonus {
+    width: min(100%, 280px);
+}
+
+}

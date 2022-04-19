@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- styles -->
+  <link rel="stylesheet" href="styles.css">
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <img class = "rps" src="./images/logo.svg" alt="logo">
+      <img class = "rpssl hide" src="./images/logo-bonus.svg" alt="logo-bonus">
+    </div>
+    <div class="score-board">
+      <div class="text">Score</div>
+      <div class="score">0</div>
+    </div>
+    <div class="indicator">
+      <div class="text">Click Here to change the game</div>
+      <img src="./images/right.svg" alt="icon-right">
+    </div>
+  </div>
+
+  <div class="game three-way">
+    <!-- ROCK PAPER SCISSORS -->
+    <div class="initial-state three-way">
+      <div class="game-hand paper">
+        <img src="./images/icon-paper.svg" alt="icon-paper">
+      </div>
+      <div class="game-hand rock">
+        <img src="./images/icon-rock.svg" alt="icon-rock">
+      </div>
+      <div class="game-hand scissors">
+        <img src="./images/icon-scissors.svg" alt="icon-scissors">
+      </div>
+      <img src="./images/bg-triangle.svg" alt="game-triangle">
+    </div>
+
+    <!-- ROCK PAPER SCISSORS SPOCK lIZARD -->
+    <div class="initial-state five-way hide">
+      <div class="game-hand paper">
+        <img src="./images/icon-paper.svg" alt="icon-paper">
+      </div>
+      <div class="game-hand rock">
+        <img src="./images/icon-rock.svg" alt="icon-rock">
+      </div>
+      <div class="game-hand scissors">
+        <img src="./images/icon-scissors.svg" alt="icon-scissors">
+      </div>
+      <div class="game-hand lizard">
+        <img src="./images/icon-lizard.svg" alt="icon-lizard">
+      </div>
+      <div class="game-hand spock">
+        <img src="./images/icon-spock.svg" alt="icon-spock">
+      </div>
+      <img src="./images/bg-pentagon.svg" alt="game-pentagon">
+    </div>
+
+
+    <div class="middle-state hide">
+      <div class="user-pick">
+        <div class="text">You Picked</div>
+        <div class="user-picked-hand" >
+        </div>
+      </div>
+      <div class="result">
+        <div class="text">you Lose</div>
+        <button type="button">play again</button>
+      </div>
+      <div class="house-pick">
+        <div class="text">The House Picked</div>
+        <div class="house-picked-hand">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <button type="button" class="rules">RULES</button>
+  <div class="modal hide">
+    <div class="modal-box">
+      <div class="text">RULES</div>
+      <img class="icon-close" src="./images/icon-close.svg" alt="icon-close">
+      <img class="img-rules" src="./images/image-rules.svg" alt="image-rules">
+      <img class="img-rules-bonus hide" src="./images/image-rules-bonus.svg" alt="image-rules">
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
